@@ -1,0 +1,20 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity clkSR is
+port(R,S,clk: in std_logic;
+		Q,nQ: out std_logic);
+end clkSR;
+
+architecture struct of clkSR is
+signal s1,s2,q1,q2: std_logic;
+begin
+		s1<= S nand clk;
+		s2<= R nand clk;
+		Q<= s1 nor q2;
+		nQ<= s2 nor q1;
+		q1<= s1 nor q2;
+		q2<= s2 nor q1;
+end struct;
+		
+		

@@ -1,0 +1,26 @@
+--building a comparator using a fullAdder
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity comp is 
+port(x,y: in std_logic_vector(1 downto 0);
+	n,v,z: out std_logic);
+end comp;
+
+architecture comp of comp is
+signal: cin,cout,c1,s0,s1,int1: std_logic;
+
+entity fullAdd is 
+port(x,y,c: in std_logic;
+	sum,carry: out std_logic);
+end fullAdd;
+begin
+		cin <= '0';
+		hye: fullAdd port map(x(0),not y(0),cin,s0,c1);
+		hmm: fullAdd port map(x(1),not y(1),c1,s1,cout);
+		z<= s0 nor s1;
+		n <= s1;
+		v <= c1 xor cout;
+end architecture comp;
+
+		

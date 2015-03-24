@@ -1,0 +1,38 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity seq1101 is
+port (x,clk: in std_logic;
+	y: out std_logic);
+end seq1101;
+
+architecture behav of seq1101 is
+type myState is (state0,state1,state2,state3);
+signal currentState : myState;
+begin
+	process(clk)
+	begin
+		currentState:=state0;--create a counter to count till the 4
+		if(clk'event and clk='1') then
+			if(currentState=state0 and x='0') then
+			currentState<=state0;
+			elsif(currentState=state0 and x='1') then
+			currentState<=state1;
+			elsif(currentState=state1 and x='0') then
+			currentState<=state0;
+			elsif(currentState=state1 and x='1') then
+			currentState<=state2;
+			elsif(currentState=state2 and x='0') then
+			currentState<=state2;
+			elsif(currentState=state2 and x='1') then
+			currentState<=state3;
+			elsif(currentState=state3 and x='0') then
+			currentState<=state0;
+			elsif(currentState=state3 and x='1') then
+			currentState<=state1; y<='1';
+			else
+			y<='0';
+			end if;
+		end if;
+	end process;
+end behav;
